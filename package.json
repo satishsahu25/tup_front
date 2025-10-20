@@ -25,7 +25,8 @@
     "react-redux": "^9.0.1",
     "react-router-dom": "^6.20.0",
     "redux-persist": "^6.0.0",
-    "tailwind-scrollbar": "^4.0.2"
+    "tailwind-scrollbar": "^4.0.2",
+    "tailwindcss": "^4.1.15"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
@@ -37,7 +38,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.13",
     "vite": "^5.0.0"
   }
 }
