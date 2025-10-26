@@ -13,27 +13,30 @@ export default function DashUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getusers`);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getusers`,{  credentials: 'include',});
+      
         const data = await res.json();
+         console.log(data);
         if (res.ok) {
           setUsers(data.users);
           if (data.users.length < 9) {
             setShowMore(false);
           }
         }
+
       } catch (error) {
         console.log(error.message);
       }
     };
-    if (currentUser.isAdmin) {
+    if (currentUser?.user.isAdmin) {
       fetchUsers();
     }
-  }, [currentUser._id]);
+  }, [currentUser?.user._id]);
 
   const handleShowMore = async () => {
     const startIndex = users.length;
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getusers?startIndex=${startIndex}`);
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/getusers?startIndex=${startIndex}`,{  credentials: 'include',});
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
@@ -50,6 +53,7 @@ export default function DashUsers() {
     try {
         const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${userIdToDelete}`, {
             method: 'DELETE',
+              credentials: 'include',
         });
         const data = await res.json();
         if (res.ok) {
@@ -65,7 +69,7 @@ export default function DashUsers() {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser.isAdmin && users.length > 0 ? (
+      {currentUser?.user.isAdmin && users.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>

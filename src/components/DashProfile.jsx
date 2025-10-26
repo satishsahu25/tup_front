@@ -173,8 +173,6 @@ const uploadImage = async () => {
   xhr.send(data);
 };
 
-
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -193,8 +191,9 @@ const uploadImage = async () => {
     }
     try {
       dispatch(updateStart());
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update/${currentUser?.user._id}`, {
         method: 'PUT',
+          credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -217,7 +216,8 @@ const uploadImage = async () => {
     setShowModal(false);
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${currentUser?.user._id}`, {
+          credentials: 'include',
         method: 'DELETE',
       });
       const data = await res.json();
@@ -234,6 +234,7 @@ const uploadImage = async () => {
   const handleSignout = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signout`, {
+          credentials: 'include',
         method: 'POST',
       });
       const data = await res.json();
@@ -283,7 +284,7 @@ const uploadImage = async () => {
             />
           )}
           <img
-            src={imageFileUrl || currentUser.profilePicture}
+            src={imageFileUrl || currentUser?.user.profilePicture}
             alt='user'
             className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
               imageFileUploadProgress &&
@@ -299,14 +300,14 @@ const uploadImage = async () => {
           type='text'
           id='username'
           placeholder='username'
-          defaultValue={currentUser.username}
+          defaultValue={currentUser?.user.username}
           onChange={handleChange}
         />
         <TextInput
           type='email'
           id='email'
           placeholder='email'
-          defaultValue={currentUser.email}
+          defaultValue={currentUser?.user.email}
           onChange={handleChange}
         />
         <TextInput
@@ -323,7 +324,7 @@ const uploadImage = async () => {
           
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        { currentUser.isAdmin && (
+        { currentUser?.user.isAdmin && (
           <Link to={'/create-post'}>
             <Button 
               type='button'

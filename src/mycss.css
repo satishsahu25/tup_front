@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=WindSong:wght@400;500&display=swap');
+
 .dancing-script {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
@@ -5,6 +7,52 @@
   font-style: normal;
 }
 
+.windsong-medium {
+  font-family: "WindSong", cursive;
+  font-weight: 500;
+  font-size: 2rem;
+}
+.footerlogo{
+  width: 300px;
+  height: auto;
+}
 .bgimage{
-  background-image: url('https://bobvirtualtours.com/cdn/shop/articles/teamwork-of-the-staff-picture-id1133385963_1024x591.jpg?v=1574283959');
+  height: 64rem;
+  width: 100%;
+  background-image: url("https://res.cloudinary.com/codercloud/image/upload/v1761455550/ChatGPT_Image_Oct_26_2025_01_10_23_PM_glq0ez.png");
+}
+
+.blog-button{
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: large;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    background-color: red;
+  }
+}
+
+.bgfooter{
+  background-color: #f3f4f6;
+}
+.nav-font-size{
+  font-size: 1rem;
+  &:hover {
+    color: red;
+  }
+}
+.searchbutton{
+  &:hover {
+    cursor: pointer;
+  }
+}
+.bgaboutimage{
+  background-image: url("https://res.cloudinary.com/codercloud/image/upload/v1761455550/ChatGPT_Image_Oct_26_2025_01_10_23_PM_glq0ez.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
 }

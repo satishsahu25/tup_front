@@ -21,6 +21,7 @@ export default function CommentSection({ postId }) {
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/create`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -63,6 +64,7 @@ export default function CommentSection({ postId }) {
         return;
       }
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/likeComment/${commentId}`, {
+          credentials: 'include',
         method: 'PUT',
       });
       if (res.ok) {
@@ -100,6 +102,7 @@ export default function CommentSection({ postId }) {
         return;
       }
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/deleteComment/${commentId}`, {
+          credentials: 'include',
         method: 'DELETE',
       });
       if (res.ok) {

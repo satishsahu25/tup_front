@@ -154,6 +154,7 @@ export default function CreatePost() {
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/create`, {
         method: 'POST',
+          credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

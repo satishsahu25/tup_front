@@ -14,7 +14,7 @@ export default function DashPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?userId=${currentUser._id}`);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts`,{  credentials: 'include',});
         const data = await res.json();
         if (res.ok) {
           setUserPosts(data.posts);
@@ -26,16 +26,16 @@ export default function DashPosts() {
         console.log(error.message);
       }
     };
-    if (currentUser.isAdmin) {
+    if (currentUser?.user.isAdmin) {
       fetchPosts();
     }
-  }, [currentUser._id]);
+  }, [currentUser?.user._id]);
 
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?userId=${currentUser?.user._id}&startIndex=${startIndex}`,{  credentials: 'include',}
       );
       const data = await res.json();
       if (res.ok) {
@@ -53,9 +53,10 @@ export default function DashPosts() {
     setShowModal(false);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/post/deletepost/${postIdToDelete}/${currentUser?.user._id}`,
         {
           method: 'DELETE',
+            credentials: 'include',
         }
       );
       const data = await res.json();
@@ -73,7 +74,7 @@ export default function DashPosts() {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser.isAdmin && userPosts.length > 0 ? (
+      {currentUser?.user.isAdmin && userPosts.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>
