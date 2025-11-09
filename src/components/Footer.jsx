@@ -33,14 +33,14 @@ const FooterCom = () => {
               <span className="block text-4xl font-extrabold mb-2 windsong-medium">About the Author</span>
               <Footer.LinkGroup col>
              
-                  <Footer.Link
+                  <Link
                     href="/about"
                     rel="noopener noreferrer"
                     className="text-lg hover:text-red-500 no-underline transition-colors duration-200"
                     style={{ textDecoration: 'none' }}
                   >
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Journey so far..........
-                  </Footer.Link>
+                  </Link>
               </Footer.LinkGroup>
             </div>}
             {/* <div>

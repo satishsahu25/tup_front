@@ -131,9 +131,9 @@ export default function Header() {
           </Dropdown>
         ) : (
           <Link to='/sign-in'>
-            <Button gradientDuoTone='purpleToBlue' outline>
+            <button className='blog-button h-10 text-sm' pill>
               Sign In
-            </Button>
+          </button>
           </Link>
         )}
         <Navbar.Toggle />
