@@ -1,5 +1,5 @@
 import { Footer } from "flowbite-react";
-import { useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {
   BsFacebook,
   BsInstagram,
