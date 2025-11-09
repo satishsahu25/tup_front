@@ -34,7 +34,7 @@ const FooterCom = () => {
               <Footer.LinkGroup col>
              
                   <Link
-                    href="/about"
+                    to="/about"
                     rel="noopener noreferrer"
                     className="text-lg hover:text-red-500 no-underline transition-colors duration-200"
                     style={{ textDecoration: 'none' }}
