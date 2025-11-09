@@ -40,18 +40,15 @@ export default function SignUp() {
   };
   return (
     <div className='min-h-screen mt-20'>
-      <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
+      <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-10'>
         {/* left */}
         <div className='flex-1'>
-          <Link to='/' className='font-bold dark:text-white text-4xl'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-              The Unfolded
-            </span>
-            Passport
+        
+           <Link to='/' className='font-bold dark:text-white text-4xl'>
+            <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png"/>
           </Link>
           <p className='text-sm mt-5'>
-            Welcome to The Unfolded Passport! You can sign up with your email and password
-            or with Google.
+          Every page I unfold is a new piece of myself I discover.
           </p>
         </div>
         {/* right */}
@@ -85,8 +82,8 @@ export default function SignUp() {
                 onChange={handleChange}
               />
             </div>
-            <Button
-              gradientDuoTone='purpleToPink'
+            <button
+            className='bg-black text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200 flex items-center justify-center'
               type='submit'
               disabled={loading}
             >
@@ -98,7 +95,7 @@ export default function SignUp() {
               ) : (
                 'Sign Up'
               )}
-            </Button>
+            </button>
             <OAuth />
           </form>
           <div className='flex gap-2 text-sm mt-5'>
