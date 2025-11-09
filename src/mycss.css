@@ -19,7 +19,7 @@
 .bgimage{
   height: 64rem;
   width: 100%;
-  background-image: url("https://res.cloudinary.com/codercloud/image/upload/v1761455550/ChatGPT_Image_Oct_26_2025_01_10_23_PM_glq0ez.png");
+  background-image: url("https://res.cloudinary.com/codercloud/image/upload/v1762658178/Black_and_White_Trendy_Modern_Feminine_Photo_Collage_Desktop_Wallpaper_ziqldz.png");
 }
 
 .blog-button{
@@ -29,7 +29,7 @@
   border: none;
   font-size: large;
   border-radius: 5px;
-  text-decoration: none;
+  text-decoration: normal;
   cursor: pointer;
   &:hover {
     background-color: red;
@@ -51,7 +51,7 @@
   }
 }
 .bgaboutimage{
-  background-image: url("https://res.cloudinary.com/codercloud/image/upload/v1761455550/ChatGPT_Image_Oct_26_2025_01_10_23_PM_glq0ez.png");
+  background-image: url("https://res.cloudinary.com/codercloud/image/upload/v1762655971/Green_Orange_Modern_Simple_India_Travel_Vlog_Youtube_Thumbnail_qaa3dq.png");
   background-size: cover;
   background-position: center;
   color: white;

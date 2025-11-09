@@ -1,6 +1,5 @@
-import React from "react";
 import { Footer } from "flowbite-react";
-import { Link ,useLocation} from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import {
   BsFacebook,
   BsInstagram,
@@ -8,6 +7,7 @@ import {
   BsYoutube,
   BsLinkedin,
   BsBack,
+  BsThreads,
 } from "react-icons/bs";
 const FooterCom = () => {
   const location = useLocation();
@@ -30,7 +30,7 @@ const FooterCom = () => {
           {/* </div> */}
           <div className="gap-8 mt-4 sm:grid-cols-2 sm:gap-6">
            {pathname!=="/about" && <div>
-              <span className="block text-4xl font-extrabold mb-2 windsong-medium">About Me</span>
+              <span className="block text-4xl font-extrabold mb-2 windsong-medium">About the Author</span>
               <Footer.LinkGroup col>
              
                   <Footer.Link
@@ -39,7 +39,7 @@ const FooterCom = () => {
                     className="text-lg hover:text-red-500 no-underline transition-colors duration-200"
                     style={{ textDecoration: 'none' }}
                   >
-                    My Journey so far..........
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Journey so far..........
                   </Footer.Link>
               </Footer.LinkGroup>
             </div>}
@@ -98,6 +98,7 @@ const FooterCom = () => {
             <Footer.Icon href="https://www.linkedin.com/in/satishsahu/" icon={BsLinkedin} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://github.com/satishsahu25" icon={BsGithub} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://www.youtube.com/@theunfoldedpassport" icon={BsYoutube} className="hover:text-red-500 transition-colors duration-200" />
+            <Footer.Icon href="https://www.threads.com/@thesatishsahu?igshid=NTc4MTIwNjQ2YQ==" icon={BsThreads} className="hover:text-red-500 transition-colors duration-200" />
           </div>
         </div>
       </div>

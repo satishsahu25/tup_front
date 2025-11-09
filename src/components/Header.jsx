@@ -55,7 +55,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className='border-b-2 sticky top-0 z-50 w-full bg-white/100 dark:bg-gray-900/90 backdrop-blur '>
+    <Navbar className='border-b-2  top-0 z-50 w-full bg-white/100 dark:bg-gray-900/90 backdrop-blur '>
       <form onSubmit={handleSubmit} className='flex items-center'>
         <div className='relative w-48 md:w-64 lg:w-96'>
           <input
@@ -97,7 +97,7 @@ export default function Header() {
           The Unfolded Passport
         </span> */}
           
-                      <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png" className="footerlogo"/>
+    <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png" className="footerlogo"/>
 
       </Link>
       <div className='flex gap-2 md:order-2'>

@@ -194,14 +194,14 @@ export default function CreatePost() {
               setFormData({ ...formData, category: e.target.value })
             }
           >
-            <option value='Uncategorized'>Select a category</option>
-            <option value='YouTube'>YouTube</option>
-            <option value='Artificial Intelligence'>Artificial Intelligence</option>
-            <option value='Lifestyle'>Lifestyle</option>
+            <option value='uncategorized'>Select a category</option>
+            <option value='youtube'>YouTube</option>
+            <option value='ai'>Artificial Intelligence</option>
+            <option value='lifestyle'>Lifestyle</option>
             {/* <option value='science'></option> */}
-            <option value='Tips & Tricks'>Tips & Tricks</option>
-            <option value='Health & Fitness'>Health & Fitness</option>
-            <option value='Travel'>Travel</option>
+            <option value='tips'>Tips & Tricks</option>
+            <option value='health'>Health & Fitness</option>
+            <option value='travel'>Travel</option>
           </Select>
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
