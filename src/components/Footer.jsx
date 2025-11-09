@@ -96,7 +96,7 @@ const FooterCom = () => {
             <Footer.Icon href="https://www.facebook.com/satishsahuv1/" icon={BsFacebook} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://www.instagram.com/thesatishsahu/" icon={BsInstagram} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://www.linkedin.com/in/satishsahu/" icon={BsLinkedin} className="hover:text-red-500 transition-colors duration-200" />
-            <Footer.Icon href="https://github.com/satishsahu25" icon={BsGithub} className="hover:text-red-500 transition-colors duration-200" />
+            {/* <Footer.Icon href="https://github.com/satishsahu25" icon={BsGithub} className="hover:text-red-500 transition-colors duration-200" /> */}
             <Footer.Icon href="https://www.youtube.com/@theunfoldedpassport" icon={BsYoutube} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://www.threads.com/@thesatishsahu?igshid=NTc4MTIwNjQ2YQ==" icon={BsThreads} className="hover:text-red-500 transition-colors duration-200" />
           </div>
