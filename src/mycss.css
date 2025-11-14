@@ -58,3 +58,16 @@
   background-position: center;
   color: white;
 }
+
+@media (max-width: 500px) {
+  /* Example: reduce logo size */
+  .header-logo {
+    width: 120px;
+    height:auto;
+  }
+
+  /* Example: hide search bar */
+  .header-search-bar {
+    display: none;
+  }
+}

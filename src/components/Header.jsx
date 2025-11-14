@@ -57,33 +57,33 @@ export default function Header() {
   return (
     <Navbar className='border-b-2  top-0 z-50 w-full bg-white/100 dark:bg-gray-900/90 backdrop-blur '>
       <form onSubmit={handleSubmit} className='flex items-center'>
-        <div className='relative w-48 md:w-64 lg:w-96'>
+        {/* <div className='relative w-48 md:w-64 lg:w-96'>
           <input
             type='text'
             placeholder='Search the blogs...'
-            className='w-full rounded-lg border border-gray-400 bg-white dark:bg-gray-900 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all'
+            className='w-full rounded-lg border border-gray-400 bg-white dark:bg-gray-900 py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all header-search-bar'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          {/* Clickable search icon visually inside the input, right aligned */}
+    
           <button
             type='submit'
-            className='absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white'
+            className='absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white header-search-bar'
             aria-label='Search'
             style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', height: '24px', width: '24px' }}
           >
             <AiOutlineSearch size={22} />
           </button>
-        </div>
+        </div> */}
         {/* Show search button for mobile and allow click to trigger search */}
-        <Button
-          className='w-12 h-10 lg:hidden searchbutton ml-2'
+        {/* <Button
+          className='w-12 h-10 lg:hidden searchbutton ml-2 header-search-bar'
           color='gray'
           type='submit'
           aria-label='Search'
         >
           <AiOutlineSearch />
-        </Button>
+        </Button> */}
       </form>
         <Link
         to='/'
@@ -97,7 +97,7 @@ export default function Header() {
           The Unfolded Passport
         </span> */}
           
-    <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png" className="footerlogo"/>
+    <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png" className="footerlogo header-logo "/>
 
       </Link>
       <div className='flex gap-2 md:order-2'>
@@ -131,7 +131,7 @@ export default function Header() {
           </Dropdown>
         ) : (
           <Link to='/sign-in'>
-            <button className='blog-button h-10 text-sm' pill>
+            <button className='blog-button h-12 text-sm' pill>
               Sign In
           </button>
           </Link>
