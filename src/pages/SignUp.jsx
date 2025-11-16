@@ -104,11 +104,11 @@ export default function SignUp() {
               Sign In
             </Link>
           </div>
-          {errorMessage && (
+          {/* {errorMessage && (
             <Alert className='mt-5' color='failure'>
               {errorMessage}
             </Alert>
-          )}
+          )} */}
         </div>
       </div>
     </div>
