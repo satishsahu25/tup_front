@@ -55,7 +55,7 @@ export default function SignUp() {
 
         <div className='flex-1'>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-            <div>
+            {/* <div>
               <Label value='Your username' />
               <TextInput
                 type='text'
@@ -95,7 +95,7 @@ export default function SignUp() {
               ) : (
                 'Sign Up'
               )}
-            </button>
+            </button> */}
             <OAuth />
           </form>
           <div className='flex gap-2 text-sm mt-5'>

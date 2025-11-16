@@ -59,7 +59,7 @@ export default function SignIn() {
 
         <div className='flex-1'>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-            <div>
+            {/* <div>
               <Label value='Your email' />
               <TextInput
                 type='email'
@@ -67,8 +67,8 @@ export default function SignIn() {
                 id='email'
                 onChange={handleChange}
               />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <Label value='Your password' />
               <TextInput
                 type='password'
@@ -76,8 +76,8 @@ export default function SignIn() {
                 id='password'
                 onChange={handleChange}
               />
-            </div>
-            <button
+            </div> */}
+            {/* <button
               className='bg-black text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200 flex items-center justify-center'
               type='submit'
               disabled={loading}
@@ -90,7 +90,7 @@ export default function SignIn() {
               ) : (
                 'Sign In'
               )}
-            </button>
+            </button> */}
             <OAuth />
           </form>
           <div className='flex gap-2 text-sm mt-5'>
