@@ -2,6 +2,7 @@ import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useRef} from 'react';
+import { useSelector } from 'react-redux';
 // import {
 //   getDownloadURL,
 //   getStorage,
@@ -15,6 +16,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
+  const { authToken } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUploading, setImageFileUploading] = useState(false);
   const [imageFileUrl, setImageFileUrl] = useState(null);
@@ -157,6 +159,7 @@ export default function CreatePost() {
           credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
         },
         body: JSON.stringify(formData),
       });

@@ -7,7 +7,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import '../mycss.css';
 
 export default function CommentSection({ postId }) {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, authToken } = useSelector((state) => state.user);
   const [comment, setComment] = useState('');
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
@@ -25,6 +25,7 @@ export default function CommentSection({ postId }) {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
         },
         body: JSON.stringify({
           content: comment,
@@ -66,6 +67,9 @@ export default function CommentSection({ postId }) {
       }
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/likeComment/${commentId}`, {
           credentials: 'include',
+        headers: {
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        },
         method: 'PUT',
       });
       if (res.ok) {
@@ -104,6 +108,9 @@ export default function CommentSection({ postId }) {
       }
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/deleteComment/${commentId}`, {
           credentials: 'include',
+        headers: {
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        },
         method: 'DELETE',
       });
       if (res.ok) {

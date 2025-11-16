@@ -15,6 +15,7 @@ export default function OAuth() {
         provider.setCustomParameters({ prompt: 'select_account'})
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider)
+                        const idToken = await resultsFromGoogle.user.getIdToken();
             const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
                 method: 'POST',
                   credentials: 'include',
@@ -23,11 +24,15 @@ export default function OAuth() {
                     name: resultsFromGoogle.user.displayName,
                     email: resultsFromGoogle.user.email,
                     googlePhotoUrl: resultsFromGoogle.user.photoURL,
+                                        idToken,
                 }),
                 })
             const data = await res.json()
             if (res.ok){
-                dispatch(signInSuccess(data))
+                                dispatch(signInSuccess({
+                                    user: data?.user || data,
+                                    token: data?.token || idToken,
+                                }))
                 navigate('/')
             }
         } catch (error) {

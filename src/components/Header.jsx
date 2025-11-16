@@ -12,7 +12,7 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, authToken } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,6 +29,9 @@ export default function Header() {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signout`, {
         method: 'POST',
           credentials: 'include',
+        headers: {
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        },
       });
       const data = await res.json();
       if (!res.ok) {

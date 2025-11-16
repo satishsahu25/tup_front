@@ -5,7 +5,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
 export default function DashComments() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, authToken } = useSelector((state) => state.user);
   const [comments, setComments] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +13,12 @@ export default function DashComments() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/getcomments`,{  credentials: 'include',});
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/comment/getcomments`, {
+          credentials: 'include',
+          headers: {
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
+        });
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);
@@ -25,16 +30,22 @@ export default function DashComments() {
         console.log(error.message);
       }
     };
-    if (currentUser?.user.isAdmin) {
+    if (currentUser?.isAdmin) {
       fetchComments();
     }
-  }, [currentUser?.user._id]);
+  }, [currentUser?._id, authToken]);
 
   const handleShowMore = async () => {
     const startIndex = comments.length;
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/comment/getcomments?startIndex=${startIndex}`,{  credentials: 'include',}
+        `${import.meta.env.VITE_BACKEND_URL}/api/comment/getcomments?startIndex=${startIndex}`,
+        {
+          credentials: 'include',
+          headers: {
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
+        }
       );
       const data = await res.json();
       if (res.ok) {
@@ -56,6 +67,9 @@ export default function DashComments() {
         {
           method: 'DELETE',
             credentials: 'include',
+          headers: {
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
         }
       );
       const data = await res.json();
@@ -74,7 +88,7 @@ export default function DashComments() {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser?.user.isAdmin && comments.length > 0 ? (
+      {currentUser?.isAdmin && comments.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>

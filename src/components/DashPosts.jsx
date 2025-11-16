@@ -6,7 +6,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { set } from 'mongoose';
 
 export default function DashPosts() {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, authToken } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +14,12 @@ export default function DashPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts`,{  credentials: 'include',});
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts`, {
+          credentials: 'include',
+          headers: {
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
+        });
         const data = await res.json();
         if (res.ok) {
           setUserPosts(data.posts);
@@ -26,16 +31,22 @@ export default function DashPosts() {
         console.log(error.message);
       }
     };
-    if (currentUser?.user.isAdmin) {
+    if (currentUser?.isAdmin) {
       fetchPosts();
     }
-  }, [currentUser?.user._id]);
+  }, [currentUser?._id, authToken]);
 
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?userId=${currentUser?.user._id}&startIndex=${startIndex}`,{  credentials: 'include',}
+        `${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?userId=${currentUser?._id}&startIndex=${startIndex}`,
+        {
+          credentials: 'include',
+          headers: {
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
+        }
       );
       const data = await res.json();
       if (res.ok) {
@@ -53,10 +64,13 @@ export default function DashPosts() {
     setShowModal(false);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/post/deletepost/${postIdToDelete}/${currentUser?.user._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/post/deletepost/${postIdToDelete}/${currentUser?._id}`,
         {
           method: 'DELETE',
             credentials: 'include',
+          headers: {
+            ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+          },
         }
       );
       const data = await res.json();
@@ -74,7 +88,7 @@ export default function DashPosts() {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser?.user.isAdmin && userPosts.length > 0 ? (
+      {currentUser?.isAdmin && userPosts.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>

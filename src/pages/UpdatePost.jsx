@@ -23,7 +23,7 @@ export default function UpdatePost() {
   const { postId } = useParams();
 
   const navigate = useNavigate();
-    const { currentUser } = useSelector((state) => state.user);
+    const { currentUser, authToken } = useSelector((state) => state.user);
 
   useEffect(() => {
     try {
@@ -85,14 +85,13 @@ export default function UpdatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(currentUser);
-    console.log(currentUser.user);
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/updatepost/${formData._id}/${currentUser?.user._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/updatepost/${formData._id}/${currentUser?._id}`, {
         method: 'PUT',
           credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
         },
         body: JSON.stringify(formData),
       });

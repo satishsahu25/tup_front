@@ -24,7 +24,7 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 export default function DashProfile() {
-  const { currentUser, error, loading } = useSelector((state) => state.user);
+  const { currentUser, authToken, error, loading } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -191,11 +191,12 @@ const uploadImage = async () => {
     }
     try {
       dispatch(updateStart());
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update/${currentUser?.user._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update/${currentUser?._id}`, {
         method: 'PUT',
           credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
         },
         body: JSON.stringify(formData),
       });
@@ -216,9 +217,12 @@ const uploadImage = async () => {
     setShowModal(false);
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${currentUser?.user._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${currentUser?._id}`, {
           credentials: 'include',
         method: 'DELETE',
+        headers: {
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        },
       });
       const data = await res.json();
       if (!res.ok) {
@@ -236,6 +240,9 @@ const uploadImage = async () => {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signout`, {
           credentials: 'include',
         method: 'POST',
+        headers: {
+          ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        },
       });
       const data = await res.json();
       if (!res.ok) {
@@ -284,7 +291,7 @@ const uploadImage = async () => {
             />
           )}
           <img
-            src={imageFileUrl || currentUser?.user.profilePicture}
+            src={imageFileUrl || currentUser?.profilePicture}
             alt='user'
             className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
               imageFileUploadProgress &&
@@ -300,14 +307,14 @@ const uploadImage = async () => {
           type='text'
           id='username'
           placeholder='username'
-          defaultValue={currentUser?.user.username}
+          defaultValue={currentUser?.username}
           onChange={handleChange}
         />
         <TextInput
           type='email'
           id='email'
           placeholder='email'
-          defaultValue={currentUser?.user.email}
+          defaultValue={currentUser?.email}
           onChange={handleChange}
         />
         <TextInput
@@ -324,7 +331,7 @@ const uploadImage = async () => {
           
           {loading ? 'Loading...' : 'Update'}
         </Button>
-        { currentUser?.user.isAdmin && (
+        { currentUser?.isAdmin && (
           <Link to={'/create-post'}>
             <Button 
               type='button'

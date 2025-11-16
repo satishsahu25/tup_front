@@ -36,7 +36,10 @@ export default function SignIn() {
       }
 
       if (res.ok) {
-        dispatch(signInSuccess(data));
+        dispatch(signInSuccess({
+          user: data?.user || data,
+          token: data?.token,
+        }));
         navigate('/');
       }
     } catch (error) {

@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const normalizeUser = (payload) => {
+  if (!payload) return null;
+  return payload.user || payload;
+};
+
 const initialState = {
   currentUser: null,
+  authToken: null,
   error: null,
   loading: false,
 };
@@ -15,7 +21,8 @@ const userSlice = createSlice({
       state.error = null;
     },
     signInSuccess: (state, action) => {
-      state.currentUser = action.payload;
+      state.currentUser = normalizeUser(action.payload);
+      state.authToken = action.payload?.token || action.payload?.authToken || null;
       state.loading = false;
       state.error = null;
     },
@@ -28,7 +35,10 @@ const userSlice = createSlice({
       state.error = null;
     },
     updateSuccess: (state, action) => {
-      state.currentUser = action.payload;
+      state.currentUser = normalizeUser(action.payload);
+      if (action.payload?.token || action.payload?.authToken) {
+        state.authToken = action.payload?.token || action.payload?.authToken;
+      }
       state.loading = false;
       state.error = null;
     },
@@ -42,6 +52,7 @@ const userSlice = createSlice({
     },
     deleteUserSuccess: (state) => {
       state.currentUser = null;
+      state.authToken = null;
       state.loading = false;
       state.error = null;
     },
@@ -51,9 +62,22 @@ const userSlice = createSlice({
     },
     signoutSuccess: (state) => {
       state.currentUser = null;
+      state.authToken = null;
       state.error = null;
       state.loading = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase('persist/REHYDRATE', (state, action) => {
+      const rehydratedUser = action?.payload?.user?.currentUser;
+      if (rehydratedUser) {
+        state.currentUser = normalizeUser(rehydratedUser);
+      }
+      const rehydratedToken = action?.payload?.user?.authToken;
+      if (rehydratedToken) {
+        state.authToken = rehydratedToken;
+      }
+    });
   },
 });
 
