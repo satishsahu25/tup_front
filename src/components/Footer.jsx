@@ -89,7 +89,7 @@ const FooterCom = () => {
         sm:flex sm:items-center sm:justify-between">
           <Footer.Copyright
             href=""
-            by="The Unfolded Passport™"
+            by="The Satish Sahu™"
             year={new Date().getFullYear()}
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
@@ -97,7 +97,7 @@ const FooterCom = () => {
             <Footer.Icon href="https://www.instagram.com/thesatishsahu/" icon={BsInstagram} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://www.linkedin.com/in/satishsahu/" icon={BsLinkedin} className="hover:text-red-500 transition-colors duration-200" />
             {/* <Footer.Icon href="https://github.com/satishsahu25" icon={BsGithub} className="hover:text-red-500 transition-colors duration-200" /> */}
-            <Footer.Icon href="https://www.youtube.com/@theunfoldedpassport" icon={BsYoutube} className="hover:text-red-500 transition-colors duration-200" />
+            <Footer.Icon href="https://www.youtube.com/@thesatishsahu" icon={BsYoutube} className="hover:text-red-500 transition-colors duration-200" />
             <Footer.Icon href="https://www.threads.com/@thesatishsahu?igshid=NTc4MTIwNjQ2YQ==" icon={BsThreads} className="hover:text-red-500 transition-colors duration-200" />
           </div>
         </div>

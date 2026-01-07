@@ -42,15 +42,15 @@ export default function SignUp() {
     <div className='min-h-screen mt-20'>
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-10'>
         {/* left */}
-        <div className='flex-1'>
+        {/* <div className='flex-1'>
         
            <Link to='/' className='font-bold dark:text-white text-4xl'>
-            <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png"/>
+            <img src="https://res.cloudinary.com/codercloud/image/upload/v1767800205/Screenshot_2026-01-08_003624_mzxec9.png"/>
           </Link>
           <p className='text-sm mt-5'>
           Every page I unfold is a new piece of myself I discover.
-          </p>
-        </div>
+          </p> */}
+        {/* </div> */}
         {/* right */}
 
         <div className='flex-1'>

@@ -100,7 +100,7 @@ export default function Header() {
           The Unfolded Passport
         </span> */}
           
-    <img src="https://res.cloudinary.com/codercloud/image/upload/v1761455293/the-unfolded-high-resolution-logo-transparent_1_wjcyyp.png" className="footerlogo header-logo "/>
+    <img src="https://res.cloudinary.com/codercloud/image/upload/v1767800205/Screenshot_2026-01-08_003624_mzxec9.png" className="footerlogo header-logo "/>
 
       </Link>
       <div className='flex gap-2 md:order-2'>
