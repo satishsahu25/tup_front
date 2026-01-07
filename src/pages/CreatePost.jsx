@@ -1,7 +1,4 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { useEffect, useRef} from 'react';
 import { useSelector } from 'react-redux';
 // import {
 //   getDownloadURL,
@@ -14,6 +11,7 @@ import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
+import TiptapEditor from '../components/TiptapEditor';
 
 export default function CreatePost() {
   const { authToken } = useSelector((state) => state.user);
@@ -102,7 +100,7 @@ export default function CreatePost() {
         const downloadURL = res.secure_url; // final CDN URL
         console.log(downloadURL);
         setImageFileUrl(downloadURL);
-        setFormData({ ...formData, image: downloadURL });
+        setFormData((prev) => ({ ...prev, image: downloadURL }));
         setImageFileUploading(false);
       } else {
         throw new Error(res.error?.message || 'Upload failed');
@@ -153,6 +151,14 @@ export default function CreatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setPublishError(null);
+    const contentText = formData.content
+      ? formData.content.replace(/<[^>]+>/g, '').trim()
+      : '';
+    if (!contentText) {
+      setPublishError('Please add some content to your post.');
+      return;
+    }
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/create`, {
         method: 'POST',
@@ -177,8 +183,9 @@ export default function CreatePost() {
       setPublishError('Something went wrong');
     }
   };
+
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <div className='p-3 max mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
@@ -189,12 +196,12 @@ export default function CreatePost() {
             id='title'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
+              setFormData((prev) => ({ ...prev, title: e.target.value }))
             }
           />
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData((prev) => ({ ...prev, category: e.target.value }))
             }
           >
             <option value='uncategorized'>Select a category</option>
@@ -241,13 +248,9 @@ export default function CreatePost() {
             className='w-full h-72 object-cover'
           />
         )}
-        <ReactQuill
-          theme='snow'
-          placeholder='Write something...'
-          className='h-72 mb-12'
-          required
-          onChange={(value) => {
-            setFormData({ ...formData, content: value });
+        <TiptapEditor
+          onChange={({ html }) => {
+            setFormData((prev) => ({ ...prev, content: html }));
           }}
         />
         <Button type='submit' gradientDuoTone='purpleToPink'>
@@ -259,6 +262,10 @@ export default function CreatePost() {
           </Alert>
         )}
       </form>
+      
+
     </div>
   );
+
 }
+

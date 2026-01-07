@@ -1,6 +1,4 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import {
   getDownloadURL,
   getStorage,
@@ -13,6 +11,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import TiptapEditor from '../components/TiptapEditor';
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -20,6 +19,7 @@ export default function UpdatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const [loadingPost, setLoadingPost] = useState(true);
   const { postId } = useParams();
 
   const navigate = useNavigate();
@@ -33,17 +33,17 @@ export default function UpdatePost() {
         if (!res.ok) {
           console.log(data.message);
           setPublishError(data.message);
-          return;
-        }
-        if (res.ok) {
+        } else {
           setPublishError(null);
           setFormData(data.posts[0]);
         }
+        setLoadingPost(false);
       };
 
       fetchPost();
     } catch (error) {
       console.log(error.message);
+      setLoadingPost(false);
     }
   }, [postId]);
 
@@ -73,7 +73,7 @@ export default function UpdatePost() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
             setImageUploadError(null);
-            setFormData({ ...formData, image: downloadURL });
+            setFormData((prev) => ({ ...prev, image: downloadURL }));
           });
         }
       );
@@ -85,6 +85,14 @@ export default function UpdatePost() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setPublishError(null);
+    const contentText = formData.content
+      ? formData.content.replace(/<[^>]+>/g, '').trim()
+      : '';
+    if (!contentText) {
+      setPublishError('Please add some content to your post.');
+      return;
+    }
     try {
       const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/updatepost/${formData._id}/${currentUser?._id}`, {
         method: 'PUT',
@@ -109,8 +117,15 @@ export default function UpdatePost() {
       setPublishError('Something went wrong');
     }
   };
+  if (loadingPost) {
+    return (
+      <div className='p-3 max-w-6xl w-full mx-auto min-h-screen flex items-center justify-center'>
+        <p>Loading post...</p>
+      </div>
+    );
+  }
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <div className='p-3 max-w-6xl w-full mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
@@ -121,13 +136,13 @@ export default function UpdatePost() {
             id='title'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
+              setFormData((prev) => ({ ...prev, title: e.target.value }))
             }
             value={formData.title}
           />
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData((prev) => ({ ...prev, category: e.target.value }))
             }
             value={formData.category}
           >
@@ -175,14 +190,11 @@ export default function UpdatePost() {
             className='w-full h-72 object-cover'
           />
         )}
-        <ReactQuill
-          theme='snow'
-          value={formData.content}
-          placeholder='Write something...'
-          className='h-72 mb-12'
-          required
-          onChange={(value) => {
-            setFormData({ ...formData, content: value });
+        <TiptapEditor
+          key={formData._id || 'update-editor'}
+          initialContent={formData.content || '<p></p>'}
+          onChange={({ html }) => {
+            setFormData((prev) => ({ ...prev, content: html }));
           }}
         />
         <Button type='submit' gradientDuoTone='purpleToPink'>

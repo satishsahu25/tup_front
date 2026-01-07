@@ -28,6 +28,59 @@ body {
   margin: 1.5rem 0;
 }
 
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1rem auto;
+  display: block;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  float: none;
+}
+
+.post-content img[data-align="left"] {
+  float: left;
+  margin: 0 1rem 1rem 0;
+}
+
+.post-content img[data-align="right"] {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+.post-content img[data-align="center"],
+.post-content img[data-align="justify"] {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-content [style*="text-align: left"] > img,
+.post-content figure[style*="text-align: left"] img {
+  float: left;
+  margin: 0 1rem 1rem 0;
+}
+
+.post-content [style*="text-align: center"] > img,
+.post-content figure[style*="text-align: center"] img {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-content [style*="text-align: right"] > img,
+.post-content figure[style*="text-align: right"] img {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+.post-content p::after,
+.post-content figure::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .post-content a {
   color: rgb(73, 149, 199);
   text-decoration: none;
