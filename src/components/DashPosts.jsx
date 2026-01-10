@@ -28,7 +28,7 @@ export default function DashPosts() {
           }
         }
       } catch (error) {
-        console.log(error.message);
+        console.log("error message post fetch");
       }
     };
     if (currentUser?.isAdmin) {
@@ -56,7 +56,7 @@ export default function DashPosts() {
         }
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("error fetching more posts");
     }
   };
 
@@ -75,14 +75,14 @@ export default function DashPosts() {
       );
       const data = await res.json();
       if (!res.ok) {
-        console.log(data.message);
+        console.log("error deleting post");
       } else {
         setUserPosts((prev) =>
           prev.filter((post) => post._id !== postIdToDelete)
         );
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("error deleting post");
     }
   };
 

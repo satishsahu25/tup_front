@@ -13,7 +13,7 @@ export default function Home() {
       const data = await res.json();
       setPosts(data.posts);
     };
-    console.log(posts);
+    console.log("fetching posts for home");
     fetchPosts();
   }, []);
   return (

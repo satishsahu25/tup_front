@@ -36,7 +36,7 @@ export default function OAuth() {
                 navigate('/')
             }
         } catch (error) {
-            console.log(error);
+            console.log("error with google sign in");
         }
     } 
   return (

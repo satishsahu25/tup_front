@@ -27,7 +27,7 @@ export default function DashComments() {
           }
         }
       } catch (error) {
-        console.log(error.message);
+        console.log("comment list error");
       }
     };
     if (currentUser?.isAdmin) {
@@ -55,7 +55,7 @@ export default function DashComments() {
         }
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("error fetching more comments");
     }
   };
 
@@ -79,10 +79,10 @@ export default function DashComments() {
         );
         setShowModal(false);
       } else {
-        console.log(data.message);
+        console.log("error deleting comment");
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("error deleting comment");
     }
   };
 

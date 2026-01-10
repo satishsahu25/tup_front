@@ -41,7 +41,7 @@ export default function CreatePost() {
   
 
   const handleUploadImage = async () => {
-    console.log(imageFile);
+    console.log("imageFile");
     try {
       if (!imageFile) {
         setImageUploadError('Please select an image');
@@ -68,7 +68,7 @@ export default function CreatePost() {
   const unsignedPreset = import.meta.env.VITE_CLOUDINARY_UNSIGNED_PRESET;
   const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
-  console.log(imageFile)
+  console.log("imageFile");
  const data = new FormData();
   data.append('file', imageFile);
   data.append('upload_preset', unsignedPreset);
@@ -98,7 +98,7 @@ export default function CreatePost() {
       const res = JSON.parse(xhr.responseText);
       if (xhr.status >= 200 && xhr.status < 300) {
         const downloadURL = res.secure_url; // final CDN URL
-        console.log(downloadURL);
+        console.log("image uploaded:", downloadURL);
         setImageFileUrl(downloadURL);
         setFormData((prev) => ({ ...prev, image: downloadURL }));
         setImageFileUploading(false);
@@ -116,7 +116,7 @@ export default function CreatePost() {
     xhr.send(data);
   } catch (error) {
     setImageUploadError('Image upload failed');
-    console.log(error);
+    console.log("image upload failed");
   }
 
 

@@ -35,12 +35,12 @@ export default function Header() {
       });
       const data = await res.json();
       if (!res.ok) {
-        console.log(data.message);
+        console.log("error signing out");
       } else {
         dispatch(signoutSuccess());
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("error signing out");
     }
   };
 

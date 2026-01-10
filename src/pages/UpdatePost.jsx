@@ -31,7 +31,7 @@ export default function UpdatePost() {
         const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?postId=${postId}`,{  credentials: 'include',});
         const data = await res.json();
         if (!res.ok) {
-          console.log(data.message);
+          console.log("error fetching post");
           setPublishError(data.message);
         } else {
           setPublishError(null);
@@ -42,7 +42,7 @@ export default function UpdatePost() {
 
       fetchPost();
     } catch (error) {
-      console.log(error.message);
+      console.log("error fetching post");
       setLoadingPost(false);
     }
   }, [postId]);
@@ -80,7 +80,7 @@ export default function UpdatePost() {
     } catch (error) {
       setImageUploadError('Image upload failed');
       setImageUploadProgress(null);
-      console.log(error);
+      console.log("error uploading image");
     }
   };
   const handleSubmit = async (e) => {

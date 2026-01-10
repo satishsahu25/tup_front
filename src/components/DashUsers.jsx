@@ -21,7 +21,7 @@ export default function DashUsers() {
         });
       
         const data = await res.json();
-         console.log(data);
+         console.log("data users:");
         if (res.ok) {
           setUsers(data.users);
           if (data.users.length < 9) {
@@ -30,7 +30,7 @@ export default function DashUsers() {
         }
 
       } catch (error) {
-        console.log(error.message);
+        console.log("error fetching users");
       }
     };
     if (currentUser?.isAdmin) {
@@ -55,7 +55,7 @@ export default function DashUsers() {
         }
       }
     } catch (error) {
-      console.log(error.message);
+      console.log("error fetching more users");
     }
   };
 
@@ -73,10 +73,10 @@ export default function DashUsers() {
             setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
             setShowModal(false);
         } else {
-            console.log(data.message);
+            console.log("error deleting user");
         }
     } catch (error) {
-        console.log(error.message);
+        console.log("error deleting user");
     }
   };
 

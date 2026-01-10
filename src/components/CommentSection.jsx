@@ -53,7 +53,7 @@ export default function CommentSection({ postId }) {
           setComments(data);
         }
       } catch (error) {
-        console.log(error.message);
+        console.log("error fetching comments");
       }
     };
     getComments();
